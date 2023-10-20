@@ -1,6 +1,10 @@
+import StatusBar from "./components/StatusBar";
+
 function App() {
   return (
-    <h1>Hello Deric</h1>
+    <>
+      <StatusBar />
+    </>
   );
 }
 
