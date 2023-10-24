@@ -13,7 +13,6 @@ const PickAreaContainer = styled.div`
   justify-content: center;
   align-items: center;
   .wrapper {
-    width: fit-content;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -38,21 +37,18 @@ function PickArea() {
       <div className="wrapper">
         <Choice
           img={paper}
-          alt="paper"
           borderColor={"hsl(229deg 85% 63%)"}
           shadowColor={"hsl(229deg 65% 46%)"}
           hover={"true"}
           name="paper" />
         <Choice
           img={scissors}
-          alt="scissors"
           borderColor={"hsl(39deg 84% 51%)"}
           shadowColor={"hsl(28deg 75% 45%)"}
           hover={"true"}
           name="scissors" />
         <Choice
           img={rock}
-          alt="rock"
           borderColor={"hsl(349deg 68% 53%)"}
           shadowColor={"hsl(348deg 74% 35%)"}
           hover={"true"}

@@ -4,6 +4,7 @@ import PickArea from "./components/PickArea";
 import RulesButton from "./components/RulesButton";
 import Rules from "./components/Rules";
 import { useGlobalContext } from "./context";
+import ResultArea from "./components/ResultArea";
 
 const AppContainer = styled.div`
   height: 100vh;
@@ -13,13 +14,13 @@ const AppContainer = styled.div`
 `
 
 function App() {
-  const { rulesIsOpen } = useGlobalContext();
+  const { rulesIsOpen, choice } = useGlobalContext();
 
   return (
     <AppContainer>
       {rulesIsOpen ? <Rules /> : undefined}
       <StatusBar />
-      <PickArea />
+      {choice ? <ResultArea /> : <PickArea />}
       <RulesButton />
     </AppContainer>
   );

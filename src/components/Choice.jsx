@@ -24,7 +24,7 @@ const ChoiceContainer = styled.div`
   }
 `
 
-function Choice({ name, img, alt, borderColor, shadowColor, hover }) {
+function Choice({ name, img, borderColor, shadowColor, hover }) {
   const { setChoice } = useGlobalContext();
   return (
     <ChoiceContainer
@@ -35,6 +35,8 @@ function Choice({ name, img, alt, borderColor, shadowColor, hover }) {
       }}
       hover={hover}
       onClick={() => {
+        // if (!hover) return;
+        console.log("clicked")
         setChoice({
           name,
           borderColor,
@@ -43,7 +45,7 @@ function Choice({ name, img, alt, borderColor, shadowColor, hover }) {
         })
       }}>
       <div className="inner">
-        <img src={img} alt={alt} />
+        <img src={img} alt={name} />
       </div>
     </ChoiceContainer>
   )
