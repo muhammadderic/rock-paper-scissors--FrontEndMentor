@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useGlobalContext } from "../context";
 import logo from "../images/logo.svg";
 
 const StatusBarContainer = styled.div`
@@ -51,13 +52,15 @@ const StatusBarContainer = styled.div`
 `
 
 function StatusBar() {
+  const { score } = useGlobalContext();
+
   return (
     <StatusBarContainer>
       <div className="wrapper">
         <img src={logo} alt="logo" className="logo" />
         <div className="score-wrapper">
           <p className="label">score</p>
-          <p className="score">0</p>
+          <p className="score">{score}</p>
         </div>
       </div>
     </StatusBarContainer>

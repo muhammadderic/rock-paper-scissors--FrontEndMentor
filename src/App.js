@@ -3,7 +3,7 @@ import StatusBar from "./components/StatusBar";
 import PickArea from "./components/PickArea";
 import RulesButton from "./components/RulesButton";
 import Rules from "./components/Rules";
-import { useState } from "react";
+import { useGlobalContext } from "./context";
 
 const AppContainer = styled.div`
   height: 100vh;
@@ -13,7 +13,8 @@ const AppContainer = styled.div`
 `
 
 function App() {
-  const [rulesIsOpen, setRulesIsOpen] = useState(false)
+  const { rulesIsOpen } = useGlobalContext();
+
   return (
     <AppContainer>
       {rulesIsOpen ? <Rules /> : undefined}

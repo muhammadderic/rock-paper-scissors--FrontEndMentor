@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useGlobalContext } from "../context";
 
 const ChoiceContainer = styled.div`
   width: 100px;
@@ -23,7 +24,8 @@ const ChoiceContainer = styled.div`
   }
 `
 
-function Choice({ img, alt, borderColor, shadowColor, hover }) {
+function Choice({ name, img, alt, borderColor, shadowColor, hover }) {
+  const { setChoice } = useGlobalContext();
   return (
     <ChoiceContainer
       className="choice"
@@ -31,7 +33,15 @@ function Choice({ img, alt, borderColor, shadowColor, hover }) {
         backgroundColor: borderColor,
         boxShadow: `0 8px ${shadowColor}, 0 11px rgba(0, 0, 0, 0.3)`
       }}
-      hover={hover}>
+      hover={hover}
+      onClick={() => {
+        setChoice({
+          name,
+          borderColor,
+          shadowColor,
+          img,
+        })
+      }}>
       <div className="inner">
         <img src={img} alt={alt} />
       </div>

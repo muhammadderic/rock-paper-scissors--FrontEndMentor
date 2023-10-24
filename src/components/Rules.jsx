@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useGlobalContext } from "../context";
 import imageRules from "../images/image-rules.svg"
 
 const RulesContainer = styled.div`
@@ -95,13 +96,15 @@ const RulesContainer = styled.div`
 `
 
 function Rules() {
+  const { setRulesIsOpen } = useGlobalContext();
+
   return (
     <RulesContainer>
       <div className="overlay"></div>
       <div className="wrapper">
         <div className="rule-content">
           <h2>rules</h2>
-          <button type="button">
+          <button type="button" onClick={() => setRulesIsOpen(false)}>
             x
           </button>
           <img src={imageRules} alt="rules" />

@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { useGlobalContext } from "../context";
 
 const Button = styled.button`
   width: 30%;
@@ -20,8 +21,9 @@ const Button = styled.button`
 `
 
 function RulesButton() {
+  const { setRulesIsOpen } = useGlobalContext();
   return (
-    <Button onClick={() => console.log("clicked")}>
+    <Button type="button" onClick={() => setRulesIsOpen(true)}>
       Rules
     </Button>
   )
