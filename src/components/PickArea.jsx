@@ -30,9 +30,7 @@ const PickAreaContainer = styled.div`
     margin: 0;
   }
   @media screen and (min-width: 1366px) {
-    border: 1px solid red;
     .wrapper {
-      border: 1px solid blue;
       width: 50%;
       height: 80%;
       background-size: 400px;
