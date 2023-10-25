@@ -177,11 +177,13 @@ function ResultArea() {
           <Choice {...choice} />
           <h3>you picked</h3>
         </div>
-        {status &&
+        {status ?
           <div className="result">
             <h2>{status}</h2>
             <button type="button" onClick={playAgain}>play again</button>
           </div>
+          :
+          <div className="result"></div>
         }
         <div className="choice-wrapper opponent-choice">
           {houseChoice ?
