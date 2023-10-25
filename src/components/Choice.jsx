@@ -36,7 +36,6 @@ function Choice({ name, img, borderColor, shadowColor, hover, className }) {
       hover={hover}
       onClick={() => {
         // if (!hover) return;
-        console.log("clicked")
         setChoice({
           name,
           borderColor,

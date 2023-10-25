@@ -196,13 +196,12 @@ function ResultArea() {
 
   useEffect(() => {
     if (!houseChoice) return;
-
     const status = checkStatus(choice.name, houseChoice.name);
     if (status === "win") {
       setScore((score) => score + 1);
     }
     setStatus(status);
-  }, [houseChoice]);
+  }, [houseChoice, choice.name, setScore]);
 
   const playAgain = () => {
     setChoice(null);
