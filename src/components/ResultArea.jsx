@@ -1,6 +1,32 @@
 import styled, { keyframes } from "styled-components";
 import { useGlobalContext } from "../context";
 import Choice from "./Choice";
+import rock from "../images/icon-rock.svg";
+import paper from "../images/icon-paper.svg";
+import scissors from "../images/icon-scissors.svg";
+import { useEffect } from "react";
+import { useState } from "react";
+
+const choices = [
+  {
+    borderColor: "hsl(229deg 85% 63%)",
+    shadowColor: "hsl(229deg 65% 46%)",
+    name: "paper",
+    img: paper,
+  },
+  {
+    borderColor: "hsl(39deg 84% 51%)",
+    shadowColor: "hsl(28deg 75% 45%)",
+    name: "scissors",
+    img: scissors,
+  },
+  {
+    borderColor: "hsl(349deg 68% 53%)",
+    shadowColor: "hsl(348deg 74% 35%)",
+    name: "rock",
+    img: rock,
+  },
+];
 
 const waitOpponent = keyframes`
     0%,100% {
@@ -11,6 +37,17 @@ const waitOpponent = keyframes`
     }
 `;
 
+const checkStatus = (firstChoice, secondChoice) => {
+  const wins = ["paper,rock", "rock,scissors", "scissors,paper"];
+  if (firstChoice === secondChoice) {
+    return "draw";
+  } else if (wins.includes(`${firstChoice},${secondChoice}`)) {
+    return "win";
+  } else {
+    return "lose";
+  }
+}
+
 const ResultAreaContainer = styled.div`
   height: calc(100vh - 170px);
   display: flex;
@@ -19,8 +56,16 @@ const ResultAreaContainer = styled.div`
   justify-content: center;
   .wrapper {
     margin: 0 auto;
-    display: flex;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    .your-choice {
+      order: 1;
+    }
+    .opponent-choice {
+      order: 2;
+    }
     .choice-wrapper {
       display: flex;
       flex-direction: column;
@@ -43,21 +88,101 @@ const ResultAreaContainer = styled.div`
         animation: ${waitOpponent} 1s infinite;
       }
     }
+    .result {
+      dispaly: flex;
+      flex-direction: column;
+      justify-content: center;
+      order: 3;
+      grid-column: span 2;
+      margin: 0 auto;
+      h2 {
+        margin: 0;
+        font-size: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #fff;
+      }
+      button {
+        width: 100px;
+        margin-top: 1rem;
+        padding: .5rem;
+        font-size: .5rem;
+        font-weight: bold;
+        font-family: inherit;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background-color: #fff;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+      }
+    }
+  }
+  @media screen and (min-width: 1028px) {
+    .wrapper {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4rem;
+      .your-choice {
+        order: 1;
+      }
+      .opponent-choice {
+        order: 3;
+      }
+      .result {
+        grid-column: span 1;
+        choice: 2;
+        button {
+          width: 150px;
+          font-size: 1rem;
+        }
+      }
+    }
   }
 `
 
 function ResultArea() {
-  const { choice } = useGlobalContext();
+  const { choice, setScore } = useGlobalContext();
+  const [houseChoice, setHouseChoice] = useState();
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    setHouseChoice(null);
+    setTimeout(() => {
+      const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+      setHouseChoice(randomChoice);
+    }, 1000);
+  }, [])
+
+  useEffect(() => {
+    if (!houseChoice) return;
+
+    const status = checkStatus(choice.name, houseChoice.name);
+    console.log(status);
+    if (status === "win") {
+      setScore((score) => score + 1);
+    }
+    setStatus(status);
+  }, [houseChoice]);
+
   return (
     <ResultAreaContainer>
       <div className="wrapper">
-        <div className="choice-wrapper">
+        <div className="choice-wrapper your-choice">
           <Choice {...choice} />
           <h3>you picked</h3>
         </div>
-        <div className="choice-wrapper">
-          {/* <Choice {...choice} /> */}
-          <div className="opponent"></div>
+        <div className="result">
+          <h2>{status}</h2>
+          <button type="button">play again</button>
+        </div>
+        <div className="choice-wrapper opponent-choice">
+          {houseChoice ?
+            <Choice {...houseChoice} /> :
+            <div className="opponent"></div>
+          }
           <h3>the house picked</h3>
         </div>
       </div>
