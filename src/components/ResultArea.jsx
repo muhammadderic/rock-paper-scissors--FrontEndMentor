@@ -144,7 +144,7 @@ const ResultAreaContainer = styled.div`
 `
 
 function ResultArea() {
-  const { choice, setScore } = useGlobalContext();
+  const { choice, setScore, setChoice } = useGlobalContext();
   const [houseChoice, setHouseChoice] = useState();
   const [status, setStatus] = useState(null);
 
@@ -160,12 +160,15 @@ function ResultArea() {
     if (!houseChoice) return;
 
     const status = checkStatus(choice.name, houseChoice.name);
-    console.log(status);
     if (status === "win") {
       setScore((score) => score + 1);
     }
     setStatus(status);
   }, [houseChoice]);
+
+  const playAgain = () => {
+    setChoice(null);
+  };
 
   return (
     <ResultAreaContainer>
@@ -174,10 +177,12 @@ function ResultArea() {
           <Choice {...choice} />
           <h3>you picked</h3>
         </div>
-        <div className="result">
-          <h2>{status}</h2>
-          <button type="button">play again</button>
-        </div>
+        {status &&
+          <div className="result">
+            <h2>{status}</h2>
+            <button type="button" onClick={playAgain}>play again</button>
+          </div>
+        }
         <div className="choice-wrapper opponent-choice">
           {houseChoice ?
             <Choice {...houseChoice} /> :
