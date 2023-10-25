@@ -49,6 +49,25 @@ const StatusBarContainer = styled.div`
       }
     }
   }
+  @media screen and (min-width: 1366px) {
+    .wrapper {
+      height: 150px;
+      border: 5px solid #fff;
+      .logo {
+        height: 6rem;
+      }
+      .score-wrapper {
+        padding: 1rem 3rem;
+        .label {
+          font-size: 2rem;
+        }
+        .score {
+          font-size: 4rem;
+        }
+      }
+    }
+    
+  }
 `
 
 function StatusBar() {

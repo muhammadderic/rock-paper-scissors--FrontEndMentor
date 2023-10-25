@@ -22,6 +22,17 @@ const ChoiceContainer = styled.div`
     border-radius: 50%;
     box-shadow: 0 7px inset hsl(228deg 22% 78%);
   }
+  @media screen and (min-width: 1366px) {
+    width: 170px;
+    height: 170px;
+    margin: auto;
+    padding: 1.2rem;
+    .inner {
+      img {
+        height: 50%;
+      }
+    }
+  }
 `
 
 function Choice({ name, img, borderColor, shadowColor, hover, className }) {

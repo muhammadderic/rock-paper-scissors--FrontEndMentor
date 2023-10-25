@@ -29,6 +29,15 @@ const PickAreaContainer = styled.div`
   @media screen and (min-width: 1028px) {
     margin: 0;
   }
+  @media screen and (min-width: 1366px) {
+    border: 1px solid red;
+    .wrapper {
+      border: 1px solid blue;
+      width: 50%;
+      height: 80%;
+      background-size: 400px;
+    }
+  }
 `
 
 function PickArea() {
