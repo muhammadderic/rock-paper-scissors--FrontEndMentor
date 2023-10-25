@@ -71,6 +71,7 @@ const ResultAreaContainer = styled.div`
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      position: relative;
       h3 {
         margin-bottom: 50px;
         color: #fff;
@@ -87,6 +88,23 @@ const ResultAreaContainer = styled.div`
         border-radius: 50%;
         animation: ${waitOpponent} 1s infinite;
       }
+        .choice::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 6rem;
+          left: 1rem;
+          right: 1rem;
+          border-radius: 50%;
+          box-shadow: none;
+        }
+        .choice.win::before {
+          transition: 0.3s;
+          box-shadow: 
+            0 0 0 1rem rgb(255 255 255 / 6%),
+            0 0 0 2rem rgb(255 255 255 / 4%), 
+            0 0 0 3rem rgb(255 255 255 / 2%);
+        }
     }
     .result {
       dispaly: flex;
@@ -131,6 +149,26 @@ const ResultAreaContainer = styled.div`
       .opponent-choice {
         order: 3;
       }
+      .choice-wrapper {
+        .choice {
+          position: relative;
+        }
+        .choice::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-radius: 50%;
+          box-shadow: none;
+        }
+        .choice.win::before {
+          transition: 0.3s;
+          box-shadow: 0 0 0 40px rgb(255 255 255 / 6%),
+            0 0 0 80px rgb(255 255 255 / 4%), 0 0 0 130px rgb(255 255 255 / 2%);
+        }
+      }
       .result {
         grid-column: span 1;
         choice: 2;
@@ -174,7 +212,7 @@ function ResultArea() {
     <ResultAreaContainer>
       <div className="wrapper">
         <div className="choice-wrapper your-choice">
-          <Choice {...choice} />
+          <Choice {...choice} className={status === "win" ? "win" : ""} />
           <h3>you picked</h3>
         </div>
         {status ?
@@ -187,7 +225,7 @@ function ResultArea() {
         }
         <div className="choice-wrapper opponent-choice">
           {houseChoice ?
-            <Choice {...houseChoice} /> :
+            <Choice {...houseChoice} className={status === "lose" ? "win" : ""} /> :
             <div className="opponent"></div>
           }
           <h3>the house picked</h3>

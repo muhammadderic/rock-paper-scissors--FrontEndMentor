@@ -24,11 +24,11 @@ const ChoiceContainer = styled.div`
   }
 `
 
-function Choice({ name, img, borderColor, shadowColor, hover }) {
+function Choice({ name, img, borderColor, shadowColor, hover, className }) {
   const { setChoice } = useGlobalContext();
   return (
     <ChoiceContainer
-      className="choice"
+      className={className + " choice"}
       style={{
         backgroundColor: borderColor,
         boxShadow: `0 8px ${shadowColor}, 0 11px rgba(0, 0, 0, 0.3)`
